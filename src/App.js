@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import BottomNav from "./Component/BottomNav";
 import Navbar from "./Component/Navbar";
 import Swap from "./Component/Swap";
 
@@ -17,7 +16,6 @@ const App = () => {
           />
           <Swap modal={modal} setModal={setModal} />
         </div>
-        <BottomNav setModal={setModal} />
       </div>
     </BrowserRouter>
   );
