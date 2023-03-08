@@ -31,8 +31,7 @@ const ImportWallet = ({ currentWallet, setImportWallet }) => {
     });
   };
   return (
-    <div className="transition-10 duration-50 justify-center items-center flex fixed -top-40   inset-0  outline-0 ">
-      <div className="lg:w-[25rem] w-[20rem] rounded-md bg-white drop-shadow-2xl">
+      <div >
         <div
           onClick={() => setImportWallet((pre) => !pre)}
           className="flex items-center  bg-white rounded-t-md cursor-pointer  border-b border-black justify-between p-4 space-x-4 "
@@ -78,7 +77,6 @@ const ImportWallet = ({ currentWallet, setImportWallet }) => {
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 };

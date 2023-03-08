@@ -1,147 +1,103 @@
-import React, { useState } from "react";
-import walletC from "../assets/walletC.svg";
-import qr from "../assets/qr.PNG";
+import { Fragment, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { GrClose } from "react-icons/gr";
+import { BsQuestionLg } from "react-icons/bs";
+import injected from "../assets/injected.png";
+import rainbow from "../assets/rainbow.webp";
+import coinbase from "../assets/coinbase.svg";
+import metamask from "../assets/metamask.png";
+import walletConnect from "../assets/walletConnect.svg";
+import trust from "../assets/trust.png";
 import ImportWallet from "./ImportWallet";
-import { AiOutlineClose } from "react-icons/ai";
-import { othersWallet } from "../Utils/mockup";
-import { NavLink } from "react-router-dom";
+const wallets = [
+  { name: "Injected Wallet", img: injected, id: 1 },
+  { name: "Rainbow", img: rainbow, id: 2 },
+  { name: "Coinbase Wallet", img: coinbase, id: 3 },
+  { name: "Metamask", img: metamask, id: 4 },
+  { name: "WalletConnect", img: walletConnect, id: 5 },
+  { name: "Trust Wallet", img: trust, id: 6 },
+];
 
-const Modal = ({ setModal }) => {
-  const [active, setActive] = useState(2);
+export default function Modal({ modal, setModal, image }) {
+  const cancelButtonRef = useRef(null);
   const [currentWallet, setCurrentWallet] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [importWallet, setImportWallet] = useState(false);
-  const itemsPerPage = 12;
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = searchResults.slice(indexOfFirstItem, indexOfLastItem);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(othersWallet.length / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  React.useEffect(() => {
-    // Filter the data based on the search term
-    const filteredData = othersWallet.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    setSearchResults(filteredData);
-  }, [searchTerm]);
   return (
-    <div>
-      <div className="">
-        {!importWallet ? (
-          <div className="transition-10 duration-50 justify-center items-center flex fixed   inset-0  outline-0 ">
-            <div>
-              <div className="flex justify-between items-center mb-3">
-                <div className="flex items-center space-x-2">
-                  <img src={walletC} alt="walletC" className="w-10" />
-                  <p className="text-2xl font-[600]">WalletConnect</p>
-                </div>
-                <NavLink to="/">
-                  <AiOutlineClose onClick={() => setModal(false)} className="bg-white rounded-full text-3xl p-1 cursor-pointer" />
-                </NavLink>
-              </div>
-              <div className="lg:w-[38rem] md:w-[35rem] w-[22rem] rounded-3xl bg-white drop-shadow-2xl">
-                <div className="lg:flex md:flex flex-col items-center lg:p-8 p-4 space-y-4 ">
-                  <div className="bg-[#d4d5d9] flex items-center space-x-2 items-center text-center p-1 lg:w-96 md:w-96 rounded-md">
-                    {[
-                      {
-                        name: "QR Code",
-                        id: 1,
-                      },
-                      {
-                        name: "Desktop",
-                        id: 2,
-                      },
-                    ].map((item) => (
-                      <button
-                        key={item.id}
-                        onClick={() => setActive(item.id)}
-                        className={`${
-                          item.id === active ? "bg-white" : ""
-                        } text-[#08fdfe] rounded-md w-full py-1 px-4`}
-                      >
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="lgtext-lg text-sm text-[#767676] font-[700]">
-                    {active === 2
-                      ? "Choose your preferred wallet"
-                      : "Scan QR code with a WalletConnect-compatible wallet"}
-                  </p>
-                  {active === 2 && (
-                    <input
-                      value={searchTerm}
-                      onChange={handleChange}
-                      placeholder="Search"
-                      className="bg-[#d4d5d9] w-full rounded-md px-4 py-2 mb-4 outline-0"
-                    />
-                  )}
+    <Transition.Root show={modal} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={cancelButtonRef}
+        onClose={setModal}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-white blur-sm bg-opacity-90 transition-opacity" />
+        </Transition.Child>
 
-                  {active === 2 ? (
-                    <>
-                      <div className=" lg:px-5 md:px-5 px-0">
-                        <div className="grid lg:grid-cols-4 grid-cols-3 lg:gap-x-5 gap-x-0 ">
-                          {currentData.map((item) => (
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <Dialog.Panel className="relative transform overflow-hidden bg-white rounded-xl p-2 text-left shadow-2xl transition-all sm:my-8 w-full lg:max-w-md max-w-sm mb-96">
+                <div>
+                  {!importWallet ? (
+                    <div className="bg-white p-3">
+                      <div className="flex items-center justify-between">
+                        <BsQuestionLg
+                          className="text-right bg-[#e7e9ee] p-2 text-4xl text-gray-800 rounded-full cursor-pointer"
+                          onClick={() => setModal(false)}
+                        />
+                        <p className="text-2xl font-[900]">Connect a Wallet</p>
+                        <GrClose
+                          className="text-right bg-[#e7e9ee] p-2 font-900] text-4xl text-gray-800 rounded-full cursor-pointer"
+                          onClick={() => setModal(false)}
+                        />
+                      </div>
+                      <div className="p-4">
+                        <p className="text-lg text-gray-400 p-2 font-[800]">
+                          Popular
+                        </p>
+                        <div className="flex flex-col space-y-5">
+                          {wallets.map((item) => (
                             <div
-                              key={item.id}
-                              className="flex flex-col items-center text-white hover:opacity-80  lg:p-4 p-1 rounded-xl cursor-pointer"
                               onClick={() => {
-                                setCurrentWallet(item.icon);
                                 setImportWallet(true);
+                                setCurrentWallet(item.img);
                               }}
+                              className="flex items-center space-x-4 hover:bg-gray-100 p-2 cursor-pointer rounded-lg"
                             >
-                              <img
-                                src={item.icon}
-                                alt="dakjdga"
-                                className="w-5 lg:w-12"
-                              />
-                              <p className="lg:text-md text-black text-xs text-center mt-4 lg:font-[700] text-[400]">
-                                {item.name}
-                              </p>
+                              <img src={item.img} className="w-8 rounded-lg" />
+                              <p className="text-xl font-[800]">{item.name}</p>
                             </div>
                           ))}
                         </div>
                       </div>
-                      <div className="text-center flex space-x-2 items-center justify-center">
-                        {pageNumbers.map((number) => (
-                          <button
-                            key={number}
-                            onClick={() => handlePageChange(number)}
-                          >
-                            {number}
-                          </button>
-                        ))}
-                      </div>
-                    </>
+                    </div>
                   ) : (
-                    <>
-                      <img src={qr} alt="qr" />
-                      <p className="cursor-pointer">Copy to clipboard</p>
-                    </>
+                    <ImportWallet currentWallet={currentWallet} />
                   )}
                 </div>
-              </div>
-            </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
-        ) : (
-          <ImportWallet currentWallet={currentWallet} />
-        )}
-      </div>
-    </div>
+        </div>
+      </Dialog>
+    </Transition.Root>
   );
-};
-
-export default Modal;
+}
