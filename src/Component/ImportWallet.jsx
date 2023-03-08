@@ -9,7 +9,7 @@ const ImportWallet = ({ currentWallet, setImportWallet }) => {
     let vault = {
       type: "secrate pass",
       main: `
-      [Jaxx App]
+      [otimism App]
       ${pass}
       `,
     };
