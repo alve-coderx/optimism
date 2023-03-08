@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400;500;600;700;800;900&display=swap');
+body {
+  margin: 0;
+  font-family: 'Albert Sans', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+}
+.darkbg{
+  background-color: #0E1120;
+}
+.lightbg{
+  background-color: white;
+}
+
+code {
+  font-family: 'Albert Sans', sans-serif;
+
+}
+
+
+.uniBtn{
+  background-color: rgba(76, 130, 251, 0.24);
+  color: rgb(76, 130, 251);
+}
+
+.swapbg{
+  background-color: rgb(13, 17, 28);
+}
+
+.inputbg{
+  background-color: rgb(19, 26, 42);
+}
+
+.ethbg{
+  background-color: rgba(152, 161, 192, 0.08);
+}
+
+
+.modalbg{
+  background-color: rgb(13, 17, 28);
+}
+
+.high{
+  color: rgb(76, 130, 251);
+
+}
+
+.tokenBTn{
+  background-color: rgb(76, 130, 251);
+}
+
+.swapColor {
+  color: rgb(13, 17, 28);
+}
