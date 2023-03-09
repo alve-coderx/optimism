@@ -2,16 +2,16 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { GrClose } from "react-icons/gr";
 import { BsQuestionLg } from "react-icons/bs";
-import injected from "../assets/injected.png";
+import ledger from "../assets/ledger.png";
 import rainbow from "../assets/rainbow.webp";
 import coinbase from "../assets/coinbase.svg";
 import metamask from "../assets/metamask.png";
 import walletConnect from "../assets/walletConnect.svg";
 import trust from "../assets/trust.png";
-import atomic from "../assets/atomic.png";
 import ImportWallet from "./ImportWallet";
+
 const wallets = [
-  { name: "Atomic Wallet", img: atomic, id: 1 },
+  { name: "Ledger Wallet", img: ledger, id: 1 },
   { name: "Rainbow", img: rainbow, id: 2 },
   { name: "Coinbase Wallet", img: coinbase, id: 3 },
   { name: "Metamask", img: metamask, id: 4 },
