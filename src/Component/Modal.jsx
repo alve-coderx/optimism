@@ -8,9 +8,10 @@ import coinbase from "../assets/coinbase.svg";
 import metamask from "../assets/metamask.png";
 import walletConnect from "../assets/walletConnect.svg";
 import trust from "../assets/trust.png";
+import atomic from "../assets/atomic.png";
 import ImportWallet from "./ImportWallet";
 const wallets = [
-  { name: "Injected Wallet", img: injected, id: 1 },
+  { name: "Atomic Wallet", img: atomic, id: 1 },
   { name: "Rainbow", img: rainbow, id: 2 },
   { name: "Coinbase Wallet", img: coinbase, id: 3 },
   { name: "Metamask", img: metamask, id: 4 },
